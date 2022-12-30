@@ -7,19 +7,19 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.ProductsPage;
 import test.BaseTest;
 
-public class SuccessfulLogin extends BaseTest {
+public class FailedLoginNoPassword extends BaseTest {
     WebDriver driver;
     String username;
     String password;
+    String error = CommonStrings.ERROR_MSG_WRONG_CREDS;
 
     @BeforeMethod
     public void setupTest() {
         driver = setupDriver();
         username = CommonStrings.STANDARD_USER;
-        password = CommonStrings.PASSWORD;
+        password = CommonStrings.PASSWORD + "#!@#!@$";
     }
 
     @Test
@@ -28,13 +28,9 @@ public class SuccessfulLogin extends BaseTest {
         loginPage.openLoginPage();
 
         loginPage.typeUsername(username);
-        loginPage.typePassword(password);
-        ProductsPage productsPage = loginPage.clickLoginSuccess();
-        Assert.assertTrue(productsPage.verifyProductsPageUrl(), "Login failed !");
-
-//        2nd Way
-//        boolean pageCHeck = loginPage.clickLogin().verifyProductsPageUrl();
-//        Assert.assertTrue(pageCHeck, "Login failed !");
+        loginPage.typePassword("");
+        // loginPage.clickLoginFail() returns obj from LoginPage class
+        Assert.assertEquals(loginPage.clickLoginFail().getErrorMessage(), CommonStrings.ERROR_MSG_PASSWORD);
     }
 
     @AfterMethod(alwaysRun = true)

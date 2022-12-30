@@ -48,11 +48,11 @@ public abstract class BasePage {
 
     // Clears text from WebElement
     private void clearFromWebElement(WebElement element) {
-        waitForWebElement(element, Timeouts.TIMEOUT_MEDIUM).clear();
+        element.clear();
     }
     // Types text to WebElement
     private void typeToWebElement(WebElement element, String text) {
-        waitForWebElement(element, Timeouts.TIMEOUT_MEDIUM).sendKeys(text);
+        element.sendKeys(text);
     }
     // Clears WebElement and types new value to it
     private void clearAndTypeToWebElement(WebElement element, String text) {
@@ -62,31 +62,31 @@ public abstract class BasePage {
 
     // Clicks WebElement
     private void clickWebELement(WebElement element) {
-        waitForWebElement(element, Timeouts.TIMEOUT_MEDIUM).click();
+        element.click();
         //element.click();
     }
 
     // Returns text from WebElement
     private String getTextFromWebElement(WebElement element) {
-        return waitForWebElement(element, Timeouts.TIMEOUT_MEDIUM).getText();
+        return element.getText();
         //element.getText();
     }
 
     // Clicks Button
     protected void clickButton(By locator) {
-        WebElement btn = driver.findElement(locator);
+        WebElement btn = waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM);
         clickWebELement(btn);
     }
 
     // Types to input
     protected void typeToInput(By locator, String text) {
-        WebElement input = driver.findElement(locator);
+        WebElement input = waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM);
         clearAndTypeToWebElement(input, text);
     }
 
     // Returns text from element
     protected String getElementText(By locator) {
-        WebElement txt = driver.findElement(locator);
+        WebElement txt = waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM);
         return getTextFromWebElement(txt);
     }
 
