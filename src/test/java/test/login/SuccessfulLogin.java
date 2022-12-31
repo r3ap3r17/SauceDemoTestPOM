@@ -23,7 +23,7 @@ public class SuccessfulLogin extends BaseTest {
     }
 
     @Test
-    public void SuccessfulLogin() {
+    public void successfulLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openLoginPage();
 

@@ -25,12 +25,14 @@ public class LoginPage extends BasePage {
         return waitForUrlChange(url, Timeouts.TIMEOUT_LONG);
     }
 
-    public void typeUsername(String username) {
+    public LoginPage typeUsername(String username) {
         typeToInput(usernameInput, username);
+        return this;
     }
 
-    public void typePassword(String password) {
+    public LoginPage typePassword(String password) {
         typeToInput(passwordInput, password);
+        return this;
     }
 
     public ProductsPage clickLoginSuccess() {
@@ -41,7 +43,6 @@ public class LoginPage extends BasePage {
         clickButton(loginButton);
         return this;
     }
-
     public String getErrorMessage() {
         return getElementText(errorBox);
     }

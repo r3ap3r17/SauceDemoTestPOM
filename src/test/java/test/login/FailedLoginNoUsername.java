@@ -11,26 +11,24 @@ import test.BaseTest;
 
 public class FailedLoginNoUsername extends BaseTest {
     WebDriver driver;
-    String username;
-    String password;
-    String error = CommonStrings.ERROR_MSG_WRONG_CREDS;
+    String username = "";
+    String password = CommonStrings.PASSWORD;
+    String error = CommonStrings.ERROR_MSG_USERNAME;
 
     @BeforeMethod
     public void setupTest() {
         driver = setupDriver();
-        username = CommonStrings.STANDARD_USER;
-        password = CommonStrings.PASSWORD + "#!@#!@$";
     }
 
     @Test
-    public void SuccessfulLogin() {
+    public void failedLoginNoUsername() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openLoginPage();
 
-        loginPage.typeUsername("");
+        loginPage.typeUsername(username);
         loginPage.typePassword(password);
         // loginPage.clickLoginFail() returns obj from LoginPage class
-        Assert.assertEquals(loginPage.clickLoginFail().getErrorMessage(), CommonStrings.ERROR_MSG_USERNAME);
+        Assert.assertEquals(loginPage.clickLoginFail().getErrorMessage(), error);
     }
 
     @AfterMethod(alwaysRun = true)

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public abstract class BasePage {
-    WebDriver driver;
+    protected WebDriver driver;
 
     // Constructor
     public BasePage(WebDriver driver) {
@@ -88,6 +88,10 @@ public abstract class BasePage {
     protected String getElementText(By locator) {
         WebElement txt = waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM);
         return getTextFromWebElement(txt);
+    }
+
+    public String getElementAttribute(By locator, String attribute) {
+        return waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM).getAttribute(attribute);
     }
 
 }

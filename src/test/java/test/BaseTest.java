@@ -3,7 +3,7 @@ package test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 
-public class BaseTest {
+public abstract class BaseTest {
 
     // Initialises WebDriverManager
     protected WebDriver setupDriver() {

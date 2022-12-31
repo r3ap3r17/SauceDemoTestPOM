@@ -11,26 +11,24 @@ import test.BaseTest;
 
 public class FailedLoginWrongCreds extends BaseTest {
     WebDriver driver;
-    String username;
-    String password;
+    String username = CommonStrings.STANDARD_USER;
+    String password = CommonStrings.PASSWORD + "#!@#!@$";
     String error = CommonStrings.ERROR_MSG_WRONG_CREDS;
 
     @BeforeMethod
     public void setupTest() {
         driver = setupDriver();
-        username = CommonStrings.STANDARD_USER;
-        password = CommonStrings.PASSWORD + "#!@#!@$";
     }
 
     @Test
-    public void SuccessfulLogin() {
+    public void failedLoginWrongCreds() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openLoginPage();
 
         loginPage.typeUsername(username);
         loginPage.typePassword(password);
         // loginPage.clickLoginFail() returns obj from LoginPage class
-        Assert.assertEquals(loginPage.clickLoginFail().getErrorMessage(), CommonStrings.ERROR_MSG_WRONG_CREDS);
+        Assert.assertEquals(loginPage.clickLoginFail().getErrorMessage(), error);
     }
 
     @AfterMethod(alwaysRun = true)
