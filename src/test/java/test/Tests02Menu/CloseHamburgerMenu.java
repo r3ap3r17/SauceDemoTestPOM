@@ -1,4 +1,4 @@
-package test.menu;
+package test.Tests02Menu;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import pages.ProductsPage;
 import pages.menu.HamburgerMenu;
 import test.BaseTest;
 
-public class OpenHamburgerMenu extends BaseTest {
+public class CloseHamburgerMenu extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -22,11 +22,13 @@ public class OpenHamburgerMenu extends BaseTest {
     }
 
     @Test
-    public void openHamburgerMenu() {
+    public void closeHamburgerMenu() {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
         HamburgerMenu menu = productsPage.openMenu();
         Assert.assertTrue(menu.isMenuDisplayed(), "Menu is not displayed !");
+        menu.closeMenu();
+        Assert.assertFalse(menu.isMenuDisplayed(), "Menu is still displayed !");
     }
 
     @AfterMethod(alwaysRun = true)

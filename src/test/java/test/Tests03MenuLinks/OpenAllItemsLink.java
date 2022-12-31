@@ -1,4 +1,4 @@
-package test.menuLinks;
+package test.Tests03MenuLinks;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;

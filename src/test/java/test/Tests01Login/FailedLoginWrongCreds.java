@@ -1,4 +1,4 @@
-package test.login;
+package test.Tests01Login;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import test.BaseTest;
 
-public class FailedLoginNoUsername extends BaseTest {
+public class FailedLoginWrongCreds extends BaseTest {
     WebDriver driver;
-    String username = "";
-    String password = CommonStrings.PASSWORD;
-    String error = CommonStrings.ERROR_MSG_USERNAME;
+    String username = CommonStrings.STANDARD_USER;
+    String password = CommonStrings.PASSWORD + "#!@#!@$";
+    String error = CommonStrings.ERROR_MSG_WRONG_CREDS;
 
     @BeforeMethod
     public void setupTest() {
@@ -21,7 +21,7 @@ public class FailedLoginNoUsername extends BaseTest {
     }
 
     @Test
-    public void failedLoginNoUsername() {
+    public void failedLoginWrongCreds() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openLoginPage();
 

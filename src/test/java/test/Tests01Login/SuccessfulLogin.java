@@ -1,4 +1,4 @@
-package test.login;
+package test.Tests01Login;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
