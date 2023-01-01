@@ -1,6 +1,7 @@
 package data;
 
 public class CommonStrings {
+    // All String values used for tests
     public static String LOGIN_PAGE_URL = "https://www.saucedemo.com/";
     public static String PRODUCTS_PAGE_URL = LOGIN_PAGE_URL + "inventory.html";
     public static String EXTERNAL_PAGE = "https://saucelabs.com/";

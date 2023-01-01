@@ -5,21 +5,24 @@ import org.openqa.selenium.WebDriver;
 
 public class ProductItemPage extends BasePage {
     private By productTitle = By.xpath("//div[@class='inventory_details_name large_size']");
-    private By backtoProductsButton = By.xpath("//button[@id='back-to-products']");
+    private By backToProductsButton = By.xpath("//button[@id='back-to-products']");
 
     public ProductItemPage(WebDriver driver) {
         super(driver);
     }
 
+    // Returns true if getProductTitle() is equal with title you provided
     public boolean verifyProductItemPage(String title) {
         return getProductTitle().equals(title);
     }
 
+    // returns product title
     public String getProductTitle() {
         return getElementText(productTitle);
     }
 
-    public void clickBacktoProductsButton() {
-        clickButton(backtoProductsButton);
+    // Clicks Back to Products button
+    public void clickBackToProductsButton() {
+        clickButton(backToProductsButton);
     }
 }

@@ -36,7 +36,7 @@ public class BackToProductButton extends BaseTest {
         ProductItemPage itemPage = productsPage.clickOnProduct(n);
         Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
 
-        itemPage.clickBacktoProductsButton();
+        itemPage.clickBackToProductsButton();
         Assert.assertTrue(productsPage.verifyProductsPage(), "Failed to go back to products page !");
     }
 

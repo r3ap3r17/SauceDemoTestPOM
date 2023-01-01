@@ -50,10 +50,12 @@ public abstract class BasePage {
     private void clearFromWebElement(WebElement element) {
         element.clear();
     }
+
     // Types text to WebElement
     private void typeToWebElement(WebElement element, String text) {
         element.sendKeys(text);
     }
+
     // Clears WebElement and types new value to it
     private void clearAndTypeToWebElement(WebElement element, String text) {
         clearFromWebElement(element);
@@ -63,8 +65,9 @@ public abstract class BasePage {
     // Clicks WebElement
     private void clickWebELement(WebElement element) {
         element.click();
-        //element.click();
     }
+
+    // returns true if element is visible/displayed
     public boolean isElementDisplayed(By locator){
         WebElement element = waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM);
         return element.isDisplayed();
@@ -93,6 +96,7 @@ public abstract class BasePage {
         return getTextFromWebElement(txt);
     }
 
+    // Returns element attribute value
     public String getElementAttribute(By locator, String attribute) {
         return waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM).getAttribute(attribute);
     }
