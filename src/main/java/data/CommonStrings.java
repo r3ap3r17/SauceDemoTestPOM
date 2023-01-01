@@ -11,4 +11,6 @@ public class CommonStrings {
     public static String ERROR_MSG_USERNAME = "Epic sadface: Username is required";
     public static String ERROR_MSG_PASSWORD = "Epic sadface: Password is required";
     public static String ERROR_MSG_LOCKED = "Epic sadface: Sorry, this user has been locked out.";
+    public static String ADD_ITEM_BUTTON = "Add to cart".toUpperCase();
+    public static String REMOVE_ITEM_BUTTON = "Remove".toUpperCase();
 }
