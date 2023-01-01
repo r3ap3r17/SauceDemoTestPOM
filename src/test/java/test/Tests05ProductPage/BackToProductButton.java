@@ -1,4 +1,4 @@
-package test.Tests04ProductsButton;
+package test.Tests05ProductPage;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +8,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.ProductItemPage;
 import pages.ProductsPage;
 import test.BaseTest;
 
-public class AddItemsToCart extends BaseTest {
+public class BackToProductButton extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -23,15 +24,20 @@ public class AddItemsToCart extends BaseTest {
 
     @DataProvider(name = "test-data")
     public Object[][] dataProvFunc(){
-        return new Object[][]{{"1"},{"2"},{"3"},{"4"},{"5"},{"6"}};
+        return new Object[][]{{"0"},{"1"},{"2"},{"3"},{"4"},{"5"}};
     }
-    @Test(dataProvider = "test-data")
-    public void addItemsToCart(String n) {
+
+    @Test(dataProvider ="test-data")
+    public void backToProductButton(String n) {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
 
-        productsPage.clickInventoryItemButton(n);
-        Assert.assertEquals(productsPage.getCartItemNumber(), "1");
+        String title = productsPage.getProductTitle(n);
+        ProductItemPage itemPage = productsPage.clickOnProduct(n);
+        Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
+
+        itemPage.clickBacktoProductsButton();
+        Assert.assertTrue(productsPage.verifyProductsPage(), "Failed to go back to products page !");
     }
 
     @AfterMethod(alwaysRun = true)

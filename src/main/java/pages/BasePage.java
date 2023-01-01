@@ -65,7 +65,10 @@ public abstract class BasePage {
         element.click();
         //element.click();
     }
-
+    public boolean isElementDisplayed(By locator){
+        WebElement element = waitForWebElement(locator, Timeouts.TIMEOUT_MEDIUM);
+        return element.isDisplayed();
+    }
     // Returns text from WebElement
     private String getTextFromWebElement(WebElement element) {
         return element.getText();
