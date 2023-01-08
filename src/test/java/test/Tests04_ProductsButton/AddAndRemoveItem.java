@@ -1,17 +1,17 @@
-package test.Tests03MenuLinks;
+package test.Tests04_ProductsButton;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
-import pages.menu.HamburgerMenu;
 import test.BaseTest;
 
-public class OpenLogoutLink extends BaseTest {
+public class AddAndRemoveItem extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -20,15 +20,19 @@ public class OpenLogoutLink extends BaseTest {
     public void setupTest() {
         driver = setupDriver();
     }
-
-    @Test
-    public void openLogoutLink() {
+    @DataProvider(name = "test-data")
+    public Object[][] dataProvFunc(){
+        return new Object[][]{{"1"},{"2"},{"3"},{"4"},{"5"},{"6"}};
+    }
+    @Test(dataProvider = "test-data")
+    public void addAndRemoveItem(String n) {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
-        HamburgerMenu menu = productsPage.openMenu();
 
-        LoginPage page = menu.clickLogOutLink();
-        Assert.assertTrue(page.verifyLoginPageUrl(), "Login page is not displayed !");
+        productsPage.clickInventoryItemButton(n);
+        Assert.assertEquals(productsPage.getItemButtonText(n), CommonStrings.REMOVE_ITEM_BUTTON);
+        productsPage.clickInventoryItemButton(n);
+        Assert.assertEquals(productsPage.getItemButtonText(n), CommonStrings.ADD_ITEM_BUTTON);
     }
 
     @AfterMethod(alwaysRun = true)

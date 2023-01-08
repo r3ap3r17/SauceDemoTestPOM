@@ -4,7 +4,6 @@ import data.CommonStrings;
 import data.Timeouts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.menu.HamburgerMenu;
 
 public class ProductsPage extends BasePage {
@@ -18,6 +17,7 @@ public class ProductsPage extends BasePage {
     // String template with %s being product item index
     private String productItemTitle = "//a[@id='item_%s_title_link']/div[@class='inventory_item_name']";
     private final By productsPageMainTitle = By.xpath("//span[@class='title']");
+    private final By shopingCart = By.xpath("//div[@id='shopping_cart_container']/a");
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
@@ -66,4 +66,8 @@ public class ProductsPage extends BasePage {
         return getElementText(title);
     }
 
+    public ShoppingCartPage clickShoppingCart() {
+        clickButton(shopingCart);
+        return new ShoppingCartPage(driver);
+    }
 }

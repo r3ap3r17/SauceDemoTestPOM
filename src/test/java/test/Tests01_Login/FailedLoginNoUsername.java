@@ -1,4 +1,4 @@
-package test.Tests01Login;
+package test.Tests01_Login;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import test.BaseTest;
 
-public class FailedLoginLockedUser extends BaseTest {
+public class FailedLoginNoUsername extends BaseTest {
     WebDriver driver;
-    String username = CommonStrings.LOCKED_USER;
+    String username = "";
     String password = CommonStrings.PASSWORD;
-    String error = CommonStrings.ERROR_MSG_LOCKED;
+    String error = CommonStrings.ERROR_MSG_USERNAME;
 
     @BeforeMethod
     public void setupTest() {
@@ -21,7 +21,7 @@ public class FailedLoginLockedUser extends BaseTest {
     }
 
     @Test
-    public void failedLoginLockedUser() {
+    public void failedLoginNoUsername() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openLoginPage();
 

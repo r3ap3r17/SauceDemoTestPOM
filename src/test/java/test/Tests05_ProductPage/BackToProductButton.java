@@ -1,17 +1,18 @@
-package test.Tests03MenuLinks;
+package test.Tests05_ProductPage;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.ProductItemPage;
 import pages.ProductsPage;
-import pages.menu.HamburgerMenu;
 import test.BaseTest;
 
-public class OpenAboutLink extends BaseTest {
+public class BackToProductButton extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -21,13 +22,22 @@ public class OpenAboutLink extends BaseTest {
         driver = setupDriver();
     }
 
-    @Test
-    public void openAboutLink() {
+    @DataProvider(name = "test-data")
+    public Object[][] dataProvFunc(){
+        return new Object[][]{{"0"},{"1"},{"2"},{"3"},{"4"},{"5"}};
+    }
+
+    @Test(dataProvider ="test-data")
+    public void backToProductButton(String n) {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
-        HamburgerMenu menu = productsPage.openMenu();
 
-        Assert.assertTrue(menu.clickAboutLink(), "Link doesnt work !");
+        String title = productsPage.getProductTitle(n);
+        ProductItemPage itemPage = productsPage.clickOnProduct(n);
+        Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
+
+        itemPage.clickBackToProductsButton();
+        Assert.assertTrue(productsPage.verifyProductsPage(), "Failed to go back to products page !");
     }
 
     @AfterMethod(alwaysRun = true)

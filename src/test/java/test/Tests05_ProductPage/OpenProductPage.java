@@ -1,4 +1,4 @@
-package test.Tests05ProductPage;
+package test.Tests05_ProductPage;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import pages.ProductItemPage;
 import pages.ProductsPage;
 import test.BaseTest;
 
-public class BackToProductButton extends BaseTest {
+public class OpenProductPage extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -28,16 +28,13 @@ public class BackToProductButton extends BaseTest {
     }
 
     @Test(dataProvider ="test-data")
-    public void backToProductButton(String n) {
+    public void addItemsToCart(String n) {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
 
         String title = productsPage.getProductTitle(n);
         ProductItemPage itemPage = productsPage.clickOnProduct(n);
         Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
-
-        itemPage.clickBackToProductsButton();
-        Assert.assertTrue(productsPage.verifyProductsPage(), "Failed to go back to products page !");
     }
 
     @AfterMethod(alwaysRun = true)

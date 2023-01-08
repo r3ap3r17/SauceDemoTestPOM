@@ -1,4 +1,4 @@
-package test.Tests02Menu;
+package test.Tests06_ShoppingCart;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +8,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
-import pages.menu.HamburgerMenu;
+import pages.ShoppingCartPage;
 import test.BaseTest;
 
-public class CloseHamburgerMenu extends BaseTest {
+public class ContinueShoppingButton extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -22,13 +22,14 @@ public class CloseHamburgerMenu extends BaseTest {
     }
 
     @Test
-    public void closeHamburgerMenu() {
+    public void openShoppingCart() {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
-        HamburgerMenu menu = productsPage.openMenu();
-        Assert.assertTrue(menu.isMenuDisplayed(), "Menu is not displayed !");
-        menu.closeMenu();
-        Assert.assertFalse(menu.isMenuDisplayed(), "Menu is still displayed !");
+
+        ShoppingCartPage cart = productsPage.clickShoppingCart();
+        Assert.assertTrue(cart.verifyShoppingCartPage(), "Shopping Cart page is not displayed !");
+        ProductsPage page = cart.clickContinueShoppingButton();
+        Assert.assertTrue(page.verifyProductsPageUrl());
     }
 
     @AfterMethod(alwaysRun = true)
