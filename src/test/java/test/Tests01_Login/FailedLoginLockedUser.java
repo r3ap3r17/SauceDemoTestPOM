@@ -6,14 +6,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.LoginPage;
+import pages.login.LoginPage;
 import test.BaseTest;
 
 public class FailedLoginLockedUser extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.LOCKED_USER;
     String password = CommonStrings.PASSWORD;
-    String error = CommonStrings.ERROR_MSG_LOCKED;
+    String error = CommonStrings.LOGIN_ERROR_MSG_LOCKED;
 
     @BeforeMethod
     public void setupTest() {

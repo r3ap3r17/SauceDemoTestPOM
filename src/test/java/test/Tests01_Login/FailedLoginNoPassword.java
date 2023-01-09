@@ -6,14 +6,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.LoginPage;
+import pages.login.LoginPage;
 import test.BaseTest;
 
 public class FailedLoginNoPassword extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = "";
-    String error = CommonStrings.ERROR_MSG_PASSWORD;
+    String error = CommonStrings.LOGIN_ERROR_MSG_PASSWORD;
 
     @BeforeMethod
     public void setupTest() {

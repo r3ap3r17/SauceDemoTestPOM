@@ -1,7 +1,8 @@
-package pages;
+package pages.all_products;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 
 public class ProductItemPage extends BasePage {
     private By productTitle = By.xpath("//div[@class='inventory_details_name large_size']");

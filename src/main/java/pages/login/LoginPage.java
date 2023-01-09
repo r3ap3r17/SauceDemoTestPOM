@@ -1,9 +1,11 @@
-package pages;
+package pages.login;
 
 import data.CommonStrings;
 import data.Timeouts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
+import pages.all_products.ProductsPage;
 
 public class LoginPage extends BasePage {
     private final String url = CommonStrings.LOGIN_PAGE_URL;

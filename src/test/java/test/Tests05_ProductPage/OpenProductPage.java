@@ -7,9 +7,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.ProductItemPage;
-import pages.ProductsPage;
+import pages.login.LoginPage;
+import pages.all_products.ProductItemPage;
+import pages.all_products.ProductsPage;
 import test.BaseTest;
 
 public class OpenProductPage extends BaseTest {

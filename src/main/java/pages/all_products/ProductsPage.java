@@ -1,9 +1,11 @@
-package pages;
+package pages.all_products;
 
 import data.CommonStrings;
 import data.Timeouts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
+import pages.shopping_cart.ShoppingCartPage;
 import pages.menu.HamburgerMenu;
 
 public class ProductsPage extends BasePage {
@@ -66,6 +68,7 @@ public class ProductsPage extends BasePage {
         return getElementText(title);
     }
 
+    // Clicks Shopping Cart Button and returns Cart page
     public ShoppingCartPage clickShoppingCart() {
         clickButton(shopingCart);
         return new ShoppingCartPage(driver);

@@ -6,9 +6,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.ProductsPage;
-import pages.ShoppingCartPage;
+import pages.login.LoginPage;
+import pages.all_products.ProductsPage;
+import pages.shopping_cart.ShoppingCartPage;
 import test.BaseTest;
 
 public class ShoppingCartButton extends BaseTest {

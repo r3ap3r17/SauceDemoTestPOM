@@ -3,8 +3,8 @@ package pages.menu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.BasePage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.login.LoginPage;
+import pages.all_products.ProductsPage;
 
 public class HamburgerMenu extends BasePage {
     private final By closeBtn = By.xpath("//button[@id='react-burger-cross-btn']");

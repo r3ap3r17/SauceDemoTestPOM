@@ -1,4 +1,4 @@
-package test.Tests03_MenuLinks;
+package test.Tests07_Checkout;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -6,12 +6,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.login.LoginPage;
 import pages.all_products.ProductsPage;
-import pages.menu.HamburgerMenu;
+import pages.login.LoginPage;
+import pages.shopping_cart.CheckoutOverviewPage;
+import pages.shopping_cart.CheckoutPage;
 import test.BaseTest;
 
-public class OpenLogoutLink extends BaseTest {
+public class CheckoutFormFailNoFirstName extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -22,13 +23,14 @@ public class OpenLogoutLink extends BaseTest {
     }
 
     @Test
-    public void openLogoutLink() {
+    public void checkoutFormFailNoFirstName() {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
-        HamburgerMenu menu = productsPage.openMenu();
 
-        LoginPage page = menu.clickLogOutLink();
-        Assert.assertTrue(page.verifyLoginPageUrl(), "Login page is not displayed !");
+        CheckoutPage checkoutPage = productsPage.clickShoppingCart().clickCheckoutButton();
+        String actualError = checkoutPage.typeFirstName("").typeLastName("Doe").typePostalCode("111")
+                .clickContinueButtonFail().getErrorMessage();
+        Assert.assertEquals(actualError, CommonStrings.CHECKOUT_ERROR_MSG_FIRSTNAME);
     }
 
     @AfterMethod(alwaysRun = true)
