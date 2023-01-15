@@ -24,7 +24,7 @@ public class CheckoutOverviewFinishButton extends BaseTest {
     }
 
     @Test
-    public void checkoutFormSuccess() {
+    public void checkoutOverviewFinishButton() {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
 
