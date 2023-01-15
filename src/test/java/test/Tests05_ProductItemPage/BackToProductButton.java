@@ -1,4 +1,4 @@
-package test.Tests04_ProductsButton;
+package test.Tests05_ProductItemPage;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +8,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.login.LoginPage;
+import pages.all_products.ProductItemPage;
 import pages.all_products.ProductsPage;
 import test.BaseTest;
 
-public class AddAndRemoveItem extends BaseTest {
+public class BackToProductButton extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -20,19 +21,23 @@ public class AddAndRemoveItem extends BaseTest {
     public void setupTest() {
         driver = setupDriver();
     }
+
     @DataProvider(name = "test-data")
     public Object[][] dataProvFunc(){
-        return new Object[][]{{"1"},{"2"},{"3"},{"4"},{"5"},{"6"}};
+        return new Object[][]{{"0"},{"1"},{"2"},{"3"},{"4"},{"5"}};
     }
-    @Test(dataProvider = "test-data")
-    public void addAndRemoveItem(String invItem) {
+
+    @Test(dataProvider ="test-data")
+    public void backToProductButton(String invItem) {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
 
-        productsPage.clickInventoryItemButton(invItem);
-        Assert.assertEquals(productsPage.getItemButtonText(invItem), CommonStrings.REMOVE_ITEM_BUTTON);
-        productsPage.clickInventoryItemButton(invItem);
-        Assert.assertEquals(productsPage.getItemButtonText(invItem), CommonStrings.ADD_ITEM_BUTTON);
+        String title = productsPage.getProductTitle(invItem);
+        ProductItemPage itemPage = productsPage.clickOnProduct(invItem);
+        Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
+
+        itemPage.clickBackToProductsButton();
+        Assert.assertTrue(productsPage.verifyProductsPage(), "Failed to go back to products page !");
     }
 
     @AfterMethod(alwaysRun = true)

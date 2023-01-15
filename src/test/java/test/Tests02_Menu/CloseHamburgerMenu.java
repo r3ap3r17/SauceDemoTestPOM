@@ -1,17 +1,17 @@
-package test.Tests04_ProductsButton;
+package test.Tests02_Menu;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.login.LoginPage;
 import pages.all_products.ProductsPage;
+import pages.menu.HamburgerMenu;
 import test.BaseTest;
 
-public class AddAndRemoveItem extends BaseTest {
+public class CloseHamburgerMenu extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -20,19 +20,15 @@ public class AddAndRemoveItem extends BaseTest {
     public void setupTest() {
         driver = setupDriver();
     }
-    @DataProvider(name = "test-data")
-    public Object[][] dataProvFunc(){
-        return new Object[][]{{"1"},{"2"},{"3"},{"4"},{"5"},{"6"}};
-    }
-    @Test(dataProvider = "test-data")
-    public void addAndRemoveItem(String invItem) {
+
+    @Test
+    public void closeHamburgerMenu() {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
-
-        productsPage.clickInventoryItemButton(invItem);
-        Assert.assertEquals(productsPage.getItemButtonText(invItem), CommonStrings.REMOVE_ITEM_BUTTON);
-        productsPage.clickInventoryItemButton(invItem);
-        Assert.assertEquals(productsPage.getItemButtonText(invItem), CommonStrings.ADD_ITEM_BUTTON);
+        HamburgerMenu menu = productsPage.openMenu();
+        Assert.assertTrue(menu.isMenuDisplayed(), "Menu is not displayed !");
+        menu.closeMenu();
+        Assert.assertFalse(menu.isMenuDisplayed(), "Menu is still displayed !");
     }
 
     @AfterMethod(alwaysRun = true)

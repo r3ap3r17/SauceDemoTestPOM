@@ -20,6 +20,7 @@ public class ProductsPage extends BasePage {
     private String productItemTitle = "//a[@id='item_%s_title_link']/div[@class='inventory_item_name']";
     private final By productsPageMainTitle = By.xpath("//span[@class='title']");
     private final By shopingCart = By.xpath("//div[@id='shopping_cart_container']/a");
+
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
