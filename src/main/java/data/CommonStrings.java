@@ -17,4 +17,5 @@ public class CommonStrings {
     public static String CHECKOUT_ERROR_MSG_FIRSTNAME = "Error: First Name is required";
     public static String CHECKOUT_ERROR_MSG_LASTNAME = "Error: Last Name is required";
     public static String CHECKOUT_ERROR_MSG_POSTALCODE = "Error: Postal Code is required";
+    public static String CHECKOUT_COMPLETE_MESSAGE = "Your order has been dispatched, and will arrive just as fast as the pony can get there!";
 }

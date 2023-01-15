@@ -28,12 +28,12 @@ public class BackToProductButton extends BaseTest {
     }
 
     @Test(dataProvider ="test-data")
-    public void backToProductButton(String n) {
+    public void backToProductButton(String invItem) {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
 
-        String title = productsPage.getProductTitle(n);
-        ProductItemPage itemPage = productsPage.clickOnProduct(n);
+        String title = productsPage.getProductTitle(invItem);
+        ProductItemPage itemPage = productsPage.clickOnProduct(invItem);
         Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
 
         itemPage.clickBackToProductsButton();

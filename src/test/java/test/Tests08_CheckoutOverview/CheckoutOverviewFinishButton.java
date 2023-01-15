@@ -1,18 +1,19 @@
-package test.Tests05_ProductPage;
+package test.Tests08_CheckoutOverview;
 
 import data.CommonStrings;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.login.LoginPage;
-import pages.all_products.ProductItemPage;
 import pages.all_products.ProductsPage;
+import pages.login.LoginPage;
+import pages.shopping_cart.CheckoutCompletePage;
+import pages.shopping_cart.CheckoutOverviewPage;
+import pages.shopping_cart.CheckoutPage;
 import test.BaseTest;
 
-public class OpenProductPage extends BaseTest {
+public class CheckoutOverviewFinishButton extends BaseTest {
     WebDriver driver;
     String username = CommonStrings.STANDARD_USER;
     String password = CommonStrings.PASSWORD;
@@ -22,19 +23,17 @@ public class OpenProductPage extends BaseTest {
         driver = setupDriver();
     }
 
-    @DataProvider(name = "test-data")
-    public Object[][] dataProvFunc(){
-        return new Object[][]{{"0"},{"1"},{"2"},{"3"},{"4"},{"5"}};
-    }
-
-    @Test(dataProvider ="test-data")
-    public void addItemsToCart(String invItem) {
+    @Test
+    public void checkoutFormSuccess() {
         LoginPage loginPage = new LoginPage(driver).openLoginPage();
         ProductsPage productsPage = loginPage.typePassword(password).typeUsername(username).clickLoginSuccess();
 
-        String title = productsPage.getProductTitle(invItem);
-        ProductItemPage itemPage = productsPage.clickOnProduct(invItem);
-        Assert.assertTrue(itemPage.verifyProductItemPage(title), "Fail to open item Page !");
+        CheckoutPage checkoutPage = productsPage.clickShoppingCart().clickCheckoutButton();
+        CheckoutOverviewPage overviewPage = checkoutPage
+                .typeFirstName("John").typeLastName("Doe").typePostalCode("111").clickContinueButtonSuccess();
+
+        CheckoutCompletePage completePage = overviewPage.clickFinishButton();
+        Assert.assertTrue(completePage.verifyCheckoutCompletePage());
     }
 
     @AfterMethod(alwaysRun = true)
